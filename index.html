@@ -13,32 +13,32 @@
       position: relative;
     }
 
-    /* Контейнер для сердечек */
-    #hearts-container {
+    /* Контейнер для сердечек через body::before */
+    body::before {
+      content: '';
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       z-index: 0;
+      pointer-events: none;
     }
 
     .heart {
-      position: absolute;
+      position: fixed;
       width: 20px;
       height: 20px;
       background-color: rgba(255,0,0,0.3);
       transform: rotate(45deg);
       animation: floatHeart linear infinite;
       border-radius: 4px 0 0 0;
+      pointer-events: none;
+      z-index: 0;
     }
     .heart:before,
     .heart:after {
       content: '';
       position: absolute;
-      width: 20px;
-      height: 20px;
+      width: 20px; height: 20px;
       background-color: rgba(255,0,0,0.3);
       border-radius: 50%;
     }
@@ -70,7 +70,6 @@
       text-shadow: 0 0 10px rgba(255,255,255,0.8), 0 0 20px rgba(255,255,255,0.5);
     }
 
-    /* Первый слайд */
     #slide1 h1 {
       font-size: 2.5rem;
       margin-top: 80px;
@@ -119,39 +118,23 @@
     .love {
       font-family: 'Montserrat', sans-serif;
       font-size: 2rem;
-      color: #8B0000; /* глубокий красный */
+      color: #8B0000;
       text-transform: uppercase;
     }
   </style></head>
-<body><!-- Полупрозрачные сердца --><div id="hearts-container"></div>
-<script>
-  window.addEventListener('load', () => {
-    const container = document.getElementById('hearts-container');
-    const numHearts = 30;
-    for (let i = 0; i < numHearts; i++) {
-      const heart = document.createElement('div');
-      heart.className = 'heart';
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.top = Math.random() * 100 + 'vh';
-      heart.style.width = 10 + Math.random() * 20 + 'px';
-      heart.style.height = heart.style.width;
-      heart.style.animationDuration = 5 + Math.random() * 10 + 's';
-      container.appendChild(heart);
-    }
-  });
-</script><!-- Slide 1 --><section class="slide active" id="slide1">
+<body><!-- Слайды --><section class="slide active" id="slide1">
   <h1>HAPPY VALENTINE'S DAY</h1>
   <img src="cat-sticker.png" alt="cat" class="cat-img" />
   <div class="choice">
     <button class="btn btn-green" id="openBtn">open</button>
     <button class="btn btn-red" id="noBtn">no</button>
   </div>
-</section><!-- Slide 2 --><section class="slide" id="slide2">
+</section><section class="slide" id="slide2">
   <div class="postcard">
     <h2>Моей самой лучшей и любимой асюше 💌</h2>
   </div>
   <button id="next2" class="btn btn-next">next</button>
-</section><!-- Slide 3 --><section class="slide" id="slide3">
+</section><section class="slide" id="slide3">
   <div class="memories">
     <h2>our memories</h2>
     <div class="photos">
@@ -160,16 +143,29 @@
     </div>
     <button id="next3" class="btn btn-next">next</button>
   </div>
-</section><!-- Slide 4 --><section class="slide" id="slide4">
+</section><section class="slide" id="slide4">
   <div class="love">Безумно тебя люблю</div>
 </section><script>
+// Создаем сердечки на фоне
 window.addEventListener('load', () => {
+  const numHearts = 30;
+  for(let i=0; i<numHearts; i++){
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.style.left = Math.random()*100 + 'vw';
+    heart.style.top = Math.random()*100 + 'vh';
+    heart.style.width = 10 + Math.random()*20 + 'px';
+    heart.style.height = heart.style.width;
+    heart.style.animationDuration = 5 + Math.random()*10 + 's';
+    document.body.appendChild(heart);
+  }
+
   const openBtn = document.getElementById('openBtn');
   const noBtn = document.getElementById('noBtn');
   const next2 = document.getElementById('next2');
   const next3 = document.getElementById('next3');
 
-  if(openBtn && noBtn) {
+  if(openBtn && noBtn){
     let scale = 1;
     noBtn.onclick = () => { scale += 0.2; openBtn.style.transform = `scale(${scale})`; };
     openBtn.onclick = () => goToSlide('slide2');
@@ -178,9 +174,9 @@ window.addEventListener('load', () => {
   if(next2) next2.onclick = () => goToSlide('slide3');
   if(next3) next3.onclick = () => goToSlide('slide4');
 
-  function goToSlide(slideId) {
+  function goToSlide(slideId){
     const slides = document.querySelectorAll('.slide');
-    slides.forEach(s => s.classList.remove('active'));
+    slides.forEach(s=>s.classList.remove('active'));
     const target = document.getElementById(slideId);
     if(target) target.classList.add('active');
     window.scrollTo(0,0);
