@@ -1,8 +1,14 @@
-<!DOCTYPE html><html lang="ru">
+<!DOCTYPE html>
+<html lang="ru">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Valentine's Day</title>  <!-- Google Font -->  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">  <style>
+  <title>Happy Valentine's Day</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
     * { box-sizing: border-box; }
     body {
       margin: 0;
@@ -13,11 +19,19 @@
       position: relative;
     }
 
+    /* Контейнер для сердечек */
+    #hearts-container {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none; /* чтобы не мешали кликам */
+      z-index: 0;
+    }
+
     /* Анимация сердечек */
     .heart {
       position: absolute;
-      width: 20px;
-      height: 20px;
+      width: 20px; height: 20px;
       background-color: rgba(255, 0, 0, 0.3);
       transform: rotate(45deg);
       animation: floatHeart linear infinite;
@@ -27,8 +41,7 @@
     .heart:after {
       content: '';
       position: absolute;
-      width: 20px;
-      height: 20px;
+      width: 20px; height: 20px;
       background-color: rgba(255, 0, 0, 0.3);
       border-radius: 50%;
     }
@@ -45,7 +58,7 @@
       min-height: 100vh;
       display: none;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
       padding: 30px 20px;
       text-align: center;
@@ -60,7 +73,12 @@
       text-shadow: 0 0 10px rgba(255,255,255,0.8), 0 0 20px rgba(255,255,255,0.5);
     }
 
-    .soft-title { font-size: 1.8rem; }
+    /* Надпись на начальном экране */
+    .soft-title {
+      font-size: 2.5rem;
+      margin-top: 80px; /* поднимаем ближе к верхней середине */
+      letter-spacing: 2px;
+    }
 
     .btn {
       border: none;
@@ -75,8 +93,7 @@
     .btn-next { background: #f6a5a5; margin-top: 30px; }
 
     .choice { display: flex; gap: 20px; margin-top: 30px; }
-    .cat-img { width: 160px; max-width: 70vw; margin: 10px 0 20px; }
-    .envelope-img { width: 120px; max-width: 60vw; margin: 10px 0 20px; }
+    .cat-img { width: 160px; max-width: 70vw; margin: 20px 0; }
 
     .postcard {
       background: #fff5f7;
@@ -103,8 +120,14 @@
     }
 
     .love { font-size: 2rem; color: #e25555; }
-  </style></head>
-<body><!-- Полупрозрачные сердца --><script>
+  </style>
+</head>
+<body>
+
+<!-- Полупрозрачные сердца -->
+<div id="hearts-container"></div>
+<script>
+  const container = document.getElementById('hearts-container');
   const numHearts = 30;
   for(let i=0; i<numHearts; i++){
     const heart = document.createElement('div');
@@ -113,22 +136,30 @@
     heart.style.animationDuration = 5 + Math.random()*10 + 's';
     heart.style.width = 10 + Math.random()*20 + 'px';
     heart.style.height = heart.style.width;
-    document.body.appendChild(heart);
+    container.appendChild(heart);
   }
-</script><!-- Slide 1 --><section class="slide active" id="slide1">
-  <h1 class="soft-title">happy valentine's day</h1>
+</script>
+
+<!-- Slide 1 -->
+<section class="slide active" id="slide1">
+  <h1 class="soft-title">HAPPY VALENTINE'S DAY</h1>
   <img src="cat-sticker.png" alt="cat" class="cat-img" />
-  <img src="envelope.png" alt="envelope" class="envelope-img" />
   <div class="choice">
     <button class="btn btn-green" id="openBtn">open</button>
     <button class="btn btn-red" id="noBtn">no</button>
   </div>
-</section><!-- Slide 2 --><section class="slide" id="slide2">
+</section>
+
+<!-- Slide 2 -->
+<section class="slide" id="slide2">
   <div class="postcard">
     <h2>Моей самой лучшей и любимой асюше 💌</h2>
   </div>
   <button id="next2" class="btn btn-next">next</button>
-</section><!-- Slide 3 --><section class="slide" id="slide3">
+</section>
+
+<!-- Slide 3 -->
+<section class="slide" id="slide3">
   <div class="memories">
     <h2>our memories</h2>
     <div class="photos">
@@ -137,9 +168,14 @@
     </div>
     <button id="next3" class="btn btn-next">next</button>
   </div>
-</section><!-- Slide 4 --><section class="slide" id="slide4">
+</section>
+
+<!-- Slide 4 -->
+<section class="slide" id="slide4">
   <div class="love">безумно тебя люблю</div>
-</section><script>
+</section>
+
+<script>
 window.addEventListener('load', () => {
   const openBtn = document.getElementById('openBtn');
   const noBtn = document.getElementById('noBtn');
@@ -163,5 +199,7 @@ window.addEventListener('load', () => {
     window.scrollTo(0,0);
   }
 });
-</script></body>
+</script>
+
+</body>
 </html>
