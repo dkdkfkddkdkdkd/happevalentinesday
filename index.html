@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html lang="ru">
+<!DOCTYPE html><html lang="ru">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Valentine's Day</title>
-
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-
-  <style>
+  <title>Happy Valentine's Day</title>  <!-- Google Font -->  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">  <style>
     * { box-sizing: border-box; }
     body {
       margin: 0;
@@ -58,7 +52,7 @@
       min-height: 100vh;
       display: none;
       flex-direction: column;
-      justify-content: flex-start;
+      justify-content: center;
       align-items: center;
       padding: 30px 20px;
       text-align: center;
@@ -73,10 +67,10 @@
       text-shadow: 0 0 10px rgba(255,255,255,0.8), 0 0 20px rgba(255,255,255,0.5);
     }
 
-    /* Надпись на начальном экране */
-    .soft-title {
+    /* Первый слайд */
+    #slide1 h1 {
       font-size: 2.5rem;
-      margin-top: 80px; /* поднимаем ближе к верхней середине */
+      margin-top: 80px; /* поднять ближе к верхней середине */
       letter-spacing: 2px;
     }
 
@@ -120,12 +114,8 @@
     }
 
     .love { font-size: 2rem; color: #e25555; }
-  </style>
-</head>
-<body>
-
-<!-- Полупрозрачные сердца -->
-<div id="hearts-container"></div>
+  </style></head>
+<body><!-- Полупрозрачные сердца --><div id="hearts-container"></div>
 <script>
   const container = document.getElementById('hearts-container');
   const numHearts = 30;
@@ -138,28 +128,19 @@
     heart.style.height = heart.style.width;
     container.appendChild(heart);
   }
-</script>
-
-<!-- Slide 1 -->
-<section class="slide active" id="slide1">
-  <h1 class="soft-title">HAPPY VALENTINE'S DAY</h1>
+</script><!-- Slide 1 --><section class="slide active" id="slide1">
+  <h1>HAPPY VALENTINE'S DAY</h1>
   <img src="cat-sticker.png" alt="cat" class="cat-img" />
   <div class="choice">
     <button class="btn btn-green" id="openBtn">open</button>
     <button class="btn btn-red" id="noBtn">no</button>
   </div>
-</section>
-
-<!-- Slide 2 -->
-<section class="slide" id="slide2">
+</section><!-- Slide 2 --><section class="slide" id="slide2">
   <div class="postcard">
     <h2>Моей самой лучшей и любимой асюше 💌</h2>
   </div>
   <button id="next2" class="btn btn-next">next</button>
-</section>
-
-<!-- Slide 3 -->
-<section class="slide" id="slide3">
+</section><!-- Slide 3 --><section class="slide" id="slide3">
   <div class="memories">
     <h2>our memories</h2>
     <div class="photos">
@@ -168,14 +149,9 @@
     </div>
     <button id="next3" class="btn btn-next">next</button>
   </div>
-</section>
-
-<!-- Slide 4 -->
-<section class="slide" id="slide4">
+</section><!-- Slide 4 --><section class="slide" id="slide4">
   <div class="love">безумно тебя люблю</div>
-</section>
-
-<script>
+</section><script>
 window.addEventListener('load', () => {
   const openBtn = document.getElementById('openBtn');
   const noBtn = document.getElementById('noBtn');
@@ -199,7 +175,5 @@ window.addEventListener('load', () => {
     window.scrollTo(0,0);
   }
 });
-</script>
-
-</body>
+</script></body>
 </html>
