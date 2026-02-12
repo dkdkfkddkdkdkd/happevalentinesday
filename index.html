@@ -13,26 +13,22 @@
       position: relative;
     }
 
-    /* Контейнер для сердечек через body::before */
-    body::before {
-      content: '';
+    /* Контейнер для сердечек на фоне */
+    #hearts-container {
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      z-index: 0;
+      z-index: -1; /* под всеми слайдами */
       pointer-events: none;
     }
 
     .heart {
-      position: fixed;
-      width: 20px;
-      height: 20px;
+      position: absolute;
+      width: 20px; height: 20px;
       background-color: rgba(255,0,0,0.3);
       transform: rotate(45deg);
       animation: floatHeart linear infinite;
       border-radius: 4px 0 0 0;
-      pointer-events: none;
-      z-index: 0;
     }
     .heart:before,
     .heart:after {
@@ -122,7 +118,7 @@
       text-transform: uppercase;
     }
   </style></head>
-<body><!-- Слайды --><section class="slide active" id="slide1">
+<body><!-- Контейнер для сердечек --><div id="hearts-container"></div><!-- Слайды --><section class="slide active" id="slide1">
   <h1>HAPPY VALENTINE'S DAY</h1>
   <img src="cat-sticker.png" alt="cat" class="cat-img" />
   <div class="choice">
@@ -146,18 +142,18 @@
 </section><section class="slide" id="slide4">
   <div class="love">Безумно тебя люблю</div>
 </section><script>
-// Создаем сердечки на фоне
-window.addEventListener('load', () => {
+window.addEventListener('load', ()=>{
+  const container = document.getElementById('hearts-container');
   const numHearts = 30;
-  for(let i=0; i<numHearts; i++){
+  for(let i=0;i<numHearts;i++){
     const heart = document.createElement('div');
     heart.className = 'heart';
-    heart.style.left = Math.random()*100 + 'vw';
-    heart.style.top = Math.random()*100 + 'vh';
+    heart.style.left = Math.random()*100+'vw';
+    heart.style.top = Math.random()*100+'vh';
     heart.style.width = 10 + Math.random()*20 + 'px';
     heart.style.height = heart.style.width;
     heart.style.animationDuration = 5 + Math.random()*10 + 's';
-    document.body.appendChild(heart);
+    container.appendChild(heart);
   }
 
   const openBtn = document.getElementById('openBtn');
@@ -167,12 +163,12 @@ window.addEventListener('load', () => {
 
   if(openBtn && noBtn){
     let scale = 1;
-    noBtn.onclick = () => { scale += 0.2; openBtn.style.transform = `scale(${scale})`; };
-    openBtn.onclick = () => goToSlide('slide2');
+    noBtn.onclick = ()=>{ scale+=0.2; openBtn.style.transform=`scale(${scale})`; };
+    openBtn.onclick = ()=>goToSlide('slide2');
   }
 
-  if(next2) next2.onclick = () => goToSlide('slide3');
-  if(next3) next3.onclick = () => goToSlide('slide4');
+  if(next2) next2.onclick = ()=>goToSlide('slide3');
+  if(next3) next3.onclick = ()=>goToSlide('slide4');
 
   function goToSlide(slideId){
     const slides = document.querySelectorAll('.slide');
