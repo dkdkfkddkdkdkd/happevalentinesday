@@ -2,11 +2,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Valentine's Day</title>  <!-- Подключаем винтажный красивый шрифт -->  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">  <style>
+  <title>Happy Valentine's Day</title>  <!-- Подключаем новый винтажный шрифт -->  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">  <style>
     * { box-sizing: border-box; }
     body {
       margin: 0;
-      font-family: 'Great Vibes', cursive;
+      font-family: 'Dancing Script', cursive;
       background: #fff;
       color: #333;
       overflow-x: hidden;
@@ -18,7 +18,7 @@
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      z-index: -1; /* под всеми слайдами */
+      z-index: -1;
       pointer-events: none;
     }
 
@@ -61,13 +61,13 @@
     .slide.active { display: flex; }
 
     h1, h2, h3, h4, h5, h6, p, button {
-      font-family: 'Great Vibes', cursive;
-      font-weight: normal;
+      font-family: 'Dancing Script', cursive;
+      font-weight: 700;
       text-shadow: 0 0 10px rgba(255,255,255,0.8), 0 0 20px rgba(255,255,255,0.5);
     }
 
     #slide1 h1 {
-      font-size: 2.5rem;
+      font-size: 3rem;
       margin-top: 80px;
       letter-spacing: 2px;
     }
@@ -75,8 +75,8 @@
     .btn {
       border: 2px solid #000;
       border-radius: 20px;
-      padding: 20px 48px; /* увеличены примерно в 2 раза */
-      font-size: 2rem; /* увеличен размер текста */
+      padding: 24px 60px;
+      font-size: 2.5rem; /* увеличен текст кнопок */
       cursor: pointer;
       transition: all 0.3s ease;
       background: transparent;
@@ -88,10 +88,14 @@
 
     .postcard {
       background: #fff5f7;
-      padding: 40px 30px;
+      padding: 50px 40px;
       border-radius: 24px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-      max-width: 420px;
+      max-width: 500px;
+    }
+
+    .postcard h2 {
+      font-size: 2.5rem; /* увеличен текст на втором слайде */
     }
 
     .memories { width: 100%; max-width: 900px; }
@@ -111,8 +115,8 @@
     }
 
     .love {
-      font-family: 'Great Vibes', cursive;
-      font-size: 2rem;
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.5rem;
       color: #8B0000;
       text-transform: uppercase;
     }
