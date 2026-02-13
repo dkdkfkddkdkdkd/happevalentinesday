@@ -3,10 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Valentine's Day</title>
+<title>Valentine</title>
 
-<!-- Винтажный шрифт -->
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
 
 <style>
 * { box-sizing: border-box; }
@@ -15,15 +14,16 @@ body {
   margin: 0;
   font-family: 'Dancing Script', cursive;
   background: #fff;
-  color: #222;
+  color: #2b1a1a;
+  overflow-x: hidden;
 }
 
-/* ---------- SLIDES ---------- */
 .slide {
   min-height: 100vh;
   display: none;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   text-align: center;
   padding: 40px 20px;
 }
@@ -32,190 +32,159 @@ body {
   display: flex;
 }
 
-/* ---------- TEXT ---------- */
-h1, h2 {
-  font-weight: 700;
-  margin: 0;
-}
-
 h1 {
+  font-size: 3.2rem;
+  letter-spacing: 0.1em;
+}
+
+.vintage-text {
   font-size: 3rem;
-  margin-bottom: 20px;
+  line-height: 1.25;
 }
 
-h2 {
-  font-size: 2.8rem;
-}
-
-/* ---------- CONTENT ---------- */
 .cat-img {
   width: 170px;
-  margin: 20px 0;
-}
-
-.postcard {
-  background: #fff5f7;
-  padding: 50px 40px;
-  border-radius: 24px;
-  max-width: 500px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-  position: relative;
+  margin: 25px 0;
 }
 
 .photos {
   display: flex;
-  gap: 14px;
+  gap: 16px;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 30px 0 10px;
+  margin-bottom: 40px;
 }
 
 .photos img {
   width: 220px;
   height: 280px;
   object-fit: cover;
-  border-radius: 20px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
-.love {
-  font-size: 2.5rem;
-  color: #8B0000;
-  text-transform: uppercase;
-}
-
-/* ---------- ARROW ---------- */
+/* стрелка */
 .arrow {
-  font-family: 'Dancing Script', cursive;
-  font-size: 4.5rem;
+  font-size: 4rem;
   cursor: pointer;
   user-select: none;
-  transition: transform 0.25s ease, opacity 0.25s ease;
-  margin-top: 40px;
+  transition: transform 0.3s ease;
 }
 
 .arrow:hover {
   transform: translateX(10px);
-  opacity: 0.7;
 }
 
-/* ---------- HEARTS (Slide 2) ---------- */
-.hearts-container {
+/* сердца на втором слайде */
+.hearts {
   position: relative;
-  width: 100%;
-  height: 150px;
-  margin-top: 20px;
+  width: 140px;
+  height: 260px;
+  margin-top: 25px;
 }
 
 .heart {
   position: absolute;
-  width: 25px;
-  height: 25px;
-  background-color: rgba(255,0,0,0.8);
+  width: 22px;
+  height: 22px;
+  background: rgba(180, 0, 0, 0.35);
   transform: rotate(45deg);
 }
 
-.heart:before,
-.heart:after {
+.heart::before,
+.heart::after {
   content: '';
   position: absolute;
-  width: 25px;
-  height: 25px;
-  background-color: rgba(255,0,0,0.8);
+  width: 22px;
+  height: 22px;
+  background: rgba(180, 0, 0, 0.35);
   border-radius: 50%;
 }
 
-.heart:before { top: -12.5px; left: 0; }
-.heart:after { left: 12.5px; top: 0; }
+.heart::before {
+  top: -11px;
+  left: 0;
+}
 
-/* ---------- LAST SLIDE CENTER ---------- */
-#slide4 .centered-container {
+.heart::after {
+  left: 11px;
+  top: 0;
+}
+
+/* последний слайд */
+.center-final {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  height: 100vh;
-}
-
-/* ---------- MOBILE ---------- */
-@media (max-width: 600px) {
-  .arrow { font-size: 4rem; margin-top: 30px; }
-  .heart, .heart:before, .heart:after { width: 18px; height: 18px; }
-  .heart:before { top: -9px; }
-  .heart:after { left: 9px; }
+  gap: 20px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- SLIDE 1 -->
+<!-- СЛАЙД 1 -->
 <section class="slide active">
   <h1>HAPPY VALENTINE'S DAY</h1>
-  <img src="cat-sticker.png" class="cat-img" alt="cat">
-  <div class="arrow">→</div>
+  <img src="cat-sticker.png" class="cat-img">
+  <div class="arrow">➝</div>
 </section>
 
-<!-- SLIDE 2 -->
+<!-- СЛАЙД 2 -->
 <section class="slide">
-  <div class="postcard">
-    <h2>Моей самой лучшей и любимой асюше 💌</h2>
+  <div class="vintage-text">
+    Моей самой лучшей и любимой асюше 💌
   </div>
-  <div class="arrow">→</div>
-  <div class="hearts-container" id="hearts-container">
-    <!-- Сердечки будут добавлены через JS -->
-  </div>
+
+  <div class="hearts" id="heartCluster"></div>
+
+  <div class="arrow">➝</div>
 </section>
 
-<!-- SLIDE 3 -->
+<!-- СЛАЙД 3 -->
 <section class="slide">
-  <h2>our memories</h2>
+  <div class="vintage-text">our memories</div>
+
   <div class="photos">
     <img src="memory1.jpg">
     <img src="memory2.jpg">
   </div>
-  <div class="arrow">→</div>
+
+  <div class="arrow">➝</div>
 </section>
 
-<!-- SLIDE 4 -->
-<section class="slide" id="slide4">
-  <div class="centered-container">
-    <div class="love">Безумно тебя люблю</div>
-    <div class="arrow">→</div>
+<!-- СЛАЙД 4 -->
+<section class="slide">
+  <div class="center-final">
+    <div class="vintage-text">Безумно тебя люблю</div>
+    <div class="arrow">➝</div>
   </div>
 </section>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const slides = document.querySelectorAll('.slide');
-  const arrows = document.querySelectorAll('.arrow');
-  let current = 0;
+const slides = document.querySelectorAll('.slide');
+const arrows = document.querySelectorAll('.arrow');
+let index = 0;
 
-  arrows.forEach(arrow => {
-    arrow.addEventListener('click', () => {
-      slides[current].classList.remove('active');
-      current = (current + 1) % slides.length;
-      slides[current].classList.add('active');
-      window.scrollTo(0, 0);
-    });
+arrows.forEach(a => {
+  a.addEventListener('click', () => {
+    slides[index].classList.remove('active');
+    index = (index + 1) % slides.length;
+    slides[index].classList.add('active');
+    window.scrollTo(0,0);
   });
-
-  // ---------- Добавление сердечек на втором слайде ----------
-  const heartsContainer = document.getElementById('hearts-container');
-  const numHearts = 18; // количество сердечек
-
-  for (let i = 0; i < numHearts; i++) {
-    const heart = document.createElement('span');
-    heart.className = 'heart';
-    // случайное положение
-    heart.style.left = Math.random() * 90 + '%';
-    heart.style.top = Math.random() * 120 + 'px';
-    // случайный наклон
-    const angle = (Math.random() * 40) - 20; // -20 до +20 градусов
-    heart.style.transform = `rotate(${45 + angle}deg)`;
-    heartsContainer.appendChild(heart);
-  }
 });
+
+/* генерация сердечек на 2 слайде */
+const heartBox = document.getElementById('heartCluster');
+for (let i = 0; i < 12; i++) {
+  const h = document.createElement('div');
+  h.className = 'heart';
+  h.style.left = Math.random() * 90 + 'px';
+  h.style.top = Math.random() * 230 + 'px';
+  h.style.transform = rotate(${45 + (Math.random()*40 - 20)}deg);
+  heartBox.appendChild(h);
+}
 </script>
 
 </body>
