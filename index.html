@@ -15,33 +15,34 @@ body {
   font-family: 'Dancing Script', cursive;
   color: #2b1a1a;
 
-  /* ФОН САЙТА */
-  background-image: url("background.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  /* ЧИСТЫЙ ФОН */
+  background: url("background.jpg") center / cover no-repeat fixed;
 }
 
 /* СЛАЙДЫ */
 .slide {
   min-height: 100vh;
-  display: none;
+  position: absolute;
+  inset: 0;
+
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
   padding: 40px 20px;
 
-  /* подложка для читаемости */
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(2px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
 }
 
 .slide.active {
-  display: flex;
+  opacity: 1;
+  pointer-events: auto;
 }
 
+/* ТЕКСТ */
 h1 {
   font-size: 3.2rem;
   letter-spacing: 0.1em;
@@ -87,7 +88,7 @@ h1 {
   transform: translateX(12px);
 }
 
-/* СЕРДЕЧКИ (2 СЛАЙД) */
+/* СЕРДЦА (2 СЛАЙД) */
 .hearts {
   position: relative;
   width: 150px;
@@ -170,14 +171,13 @@ h1 {
 const slides = document.querySelectorAll('.slide');
 let current = 0;
 
-/* ПЕРЕКЛЮЧЕНИЕ СЛАЙДОВ */
+/* ПЕРЕКЛЮЧЕНИЕ С FADE */
 document.addEventListener('click', (e) => {
   if (!e.target.classList.contains('arrow')) return;
 
   slides[current].classList.remove('active');
   current = (current + 1) % slides.length;
   slides[current].classList.add('active');
-  window.scrollTo(0, 0);
 });
 
 /* СЕРДЕЧКИ */
