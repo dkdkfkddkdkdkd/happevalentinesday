@@ -5,15 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy Valentine's Day</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+<!-- Основной шрифт для всего текста -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
 * { box-sizing: border-box; }
 
 body {
   margin: 0;
-  font-family: 'Dancing Script', cursive;
+  font-family: 'Montserrat', sans-serif;
   background: #fff;
   color: #222;
 }
@@ -33,6 +33,11 @@ body {
 }
 
 /* ---------- TEXT ---------- */
+h1, h2 {
+  font-weight: 700;
+  margin: 0;
+}
+
 h1 {
   font-size: 3rem;
   margin-bottom: 20px;
@@ -40,7 +45,6 @@ h1 {
 
 h2 {
   font-size: 2.8rem;
-  margin: 0;
 }
 
 /* ---------- CONTENT ---------- */
@@ -81,17 +85,41 @@ h2 {
 
 /* ---------- ARROW ---------- */
 .arrow {
-  font-family: 'Montserrat', sans-serif;
   font-size: 4.5rem;
   cursor: pointer;
   user-select: none;
   transition: transform 0.25s ease, opacity 0.25s ease;
+  margin-top: 40px;
 }
 
 .arrow:hover {
   transform: translateX(10px);
   opacity: 0.7;
 }
+
+/* ---------- HEARTS (Slide 2) ---------- */
+.heart {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  background-color: rgba(255,0,0,0.8);
+  transform: rotate(45deg);
+  margin: 0 5px;
+  position: relative;
+}
+
+.heart:before,
+.heart:after {
+  content: '';
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  background-color: rgba(255,0,0,0.8);
+  border-radius: 50%;
+}
+
+.heart:before { top: -12.5px; left: 0; }
+.heart:after { left: 12.5px; top: 0; }
 
 /* ---------- LAST SLIDE CENTER ---------- */
 #slide4 .centered-container {
@@ -102,15 +130,12 @@ h2 {
   height: 100vh;
 }
 
-#slide4 .arrow {
-  margin-top: 40px;
-}
-
 /* ---------- MOBILE ---------- */
 @media (max-width: 600px) {
-  .arrow {
-    font-size: 4rem;
-  }
+  .arrow { font-size: 4rem; }
+  .heart, .heart:before, .heart:after { width: 18px; height: 18px; }
+  .heart:before { top: -9px; }
+  .heart:after { left: 9px; }
 }
 </style>
 </head>
@@ -130,6 +155,15 @@ h2 {
     <h2>Моей самой лучшей и любимой асюше 💌</h2>
   </div>
   <div class="arrow">→</div>
+  <div class="hearts-container" style="margin-top:20px;">
+    <!-- Рандомные сердечки -->
+    <span class="heart" style="margin-left:0;"></span>
+    <span class="heart" style="margin-left:10px; transform: rotate(40deg)"></span>
+    <span class="heart" style="margin-left:-5px; transform: rotate(20deg)"></span>
+    <span class="heart" style="margin-left:15px; transform: rotate(60deg)"></span>
+    <span class="heart" style="margin-left:-10px; transform: rotate(30deg)"></span>
+    <span class="heart" style="margin-left:5px; transform: rotate(50deg)"></span>
+  </div>
 </section>
 
 <!-- SLIDE 3 -->
