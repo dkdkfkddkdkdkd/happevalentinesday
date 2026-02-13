@@ -189,7 +189,7 @@ document.addEventListener('click', (e) => {
   slides[current].classList.add('active');
 });
 
-/* 2-й слайд - удаляем белый фон с JPG и добавляем объекты */
+/* 2-й слайд - удаляем белый фон с JPG и размещаем объекты в свободной области */
 function removeWhiteBackground(src, callback) {
   const img = new Image();
   img.src = src;
@@ -222,16 +222,25 @@ const objects = ['x1.jpg','x2.jpg','x3.jpg','x4.jpg','x5.jpg','x6.jpg','x7.jpg',
 objects.forEach(src => {
   removeWhiteBackground(src, (img) => {
     img.style.position = 'absolute';
-    img.style.width = (80 + Math.random()*40) + 'px'; // средний размер
+    img.style.width = (80 + Math.random()*40) + 'px';
     img.style.height = 'auto';
-    img.style.top = Math.random() * 250 + 'px';
-    img.style.left = Math.random() * (objectContainer.offsetWidth - 120) + 'px';
-    img.style.transform = `rotate(${(Math.random()*30 - 15)}deg)`;
+
+    // свободная область под текстом
+    const containerWidth = objectContainer.offsetWidth;
+    const containerHeight = objectContainer.offsetHeight;
+    const padding = 20;
+
+    img.style.top = (padding + Math.random() * (containerHeight - 80 - 2*padding)) + 'px';
+    img.style.left = (padding + Math.random() * (containerWidth - 80 - 2*padding)) + 'px';
+
+    // лёгкий поворот ±10°
+    img.style.transform = `rotate(${(Math.random()*20 - 10)}deg)`;
+
     objectContainer.appendChild(img);
   });
 });
 
-/* Запуск анимации для первого слайда */
+/* Анимация первого слайда */
 window.addEventListener('load', () => {
   const firstSlideElements = document.querySelectorAll('.slide.active .fade-up');
   firstSlideElements.forEach(el => el.style.opacity = 0);
