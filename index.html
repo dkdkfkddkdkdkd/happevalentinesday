@@ -13,10 +13,17 @@
 body {
   margin: 0;
   font-family: 'Dancing Script', cursive;
-  background: #fff;
   color: #2b1a1a;
+
+  /* ФОН САЙТА */
+  background-image: url("background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
+/* СЛАЙДЫ */
 .slide {
   min-height: 100vh;
   display: none;
@@ -25,6 +32,10 @@ body {
   justify-content: center;
   text-align: center;
   padding: 40px 20px;
+
+  /* подложка для читаемости */
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(2px);
 }
 
 .slide.active {
@@ -46,6 +57,7 @@ h1 {
   margin: 25px 0;
 }
 
+/* ФОТО */
 .photos {
   display: flex;
   gap: 16px;
@@ -75,7 +87,7 @@ h1 {
   transform: translateX(12px);
 }
 
-/* сердца 2 слайд */
+/* СЕРДЕЧКИ (2 СЛАЙД) */
 .hearts {
   position: relative;
   width: 150px;
@@ -104,7 +116,7 @@ h1 {
 .heart::before { top: -11px; left: 0; }
 .heart::after { left: 11px; top: 0; }
 
-/* финал */
+/* ФИНАЛ */
 .center-final {
   display: flex;
   flex-direction: column;
@@ -116,12 +128,14 @@ h1 {
 
 <body>
 
+<!-- СЛАЙД 1 -->
 <section class="slide active">
   <h1>HAPPY VALENTINE'S DAY</h1>
   <img src="cat-sticker.png" class="cat-img">
   <div class="arrow">➝</div>
 </section>
 
+<!-- СЛАЙД 2 -->
 <section class="slide">
   <div class="vintage-text">
     Моей самой лучшей и любимой асюше 💌
@@ -132,6 +146,7 @@ h1 {
   <div class="arrow">➝</div>
 </section>
 
+<!-- СЛАЙД 3 -->
 <section class="slide">
   <div class="vintage-text">our memories</div>
 
@@ -143,6 +158,7 @@ h1 {
   <div class="arrow">➝</div>
 </section>
 
+<!-- СЛАЙД 4 -->
 <section class="slide">
   <div class="center-final">
     <div class="vintage-text">Безумно тебя люблю</div>
@@ -154,7 +170,7 @@ h1 {
 const slides = document.querySelectorAll('.slide');
 let current = 0;
 
-/* ВАЖНО: делегирование клика */
+/* ПЕРЕКЛЮЧЕНИЕ СЛАЙДОВ */
 document.addEventListener('click', (e) => {
   if (!e.target.classList.contains('arrow')) return;
 
@@ -164,7 +180,7 @@ document.addEventListener('click', (e) => {
   window.scrollTo(0, 0);
 });
 
-/* сердца */
+/* СЕРДЕЧКИ */
 const heartBox = document.getElementById('heartCluster');
 for (let i = 0; i < 14; i++) {
   const h = document.createElement('div');
