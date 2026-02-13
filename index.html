@@ -14,8 +14,6 @@ body {
   margin: 0;
   font-family: 'Dancing Script', cursive;
   color: #2b1a1a;
-
-  /* ЧИСТЫЙ ФОН */
   background: url("background.jpg") center / cover no-repeat fixed;
 }
 
@@ -42,17 +40,18 @@ body {
   pointer-events: auto;
 }
 
-/* ВИНТАЖНЫЙ ЗАГОЛОВОК (1 и 4 слайд) */
+/* ВИНТАЖНЫЙ ПРОПИСНОЙ ЗАГОЛОВОК (ЧИСТЫЙ DANCING SCRIPT) */
 .vintage-title {
   font-family: 'Dancing Script', cursive;
   font-weight: 700;
-  font-size: 3.2rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font-size: 3.4rem;
+  line-height: 1.2;
 }
 
-/* ОБЫЧНЫЙ ВИНТАЖНЫЙ ТЕКСТ */
+/* ОСНОВНОЙ ТЕКСТ */
 .vintage-text {
+  font-family: 'Dancing Script', cursive;
+  font-weight: 600;
   font-size: 3rem;
   line-height: 1.25;
 }
@@ -135,7 +134,7 @@ body {
 
 <!-- СЛАЙД 1 -->
 <section class="slide active">
-  <div class="vintage-title">HAPPY VALENTINE'S DAY</div>
+  <div class="vintage-title">Happy Valentine’s Day</div>
   <img src="cat-sticker.png" class="cat-img">
   <div class="arrow">➝</div>
 </section>
@@ -175,7 +174,7 @@ body {
 const slides = document.querySelectorAll('.slide');
 let current = 0;
 
-/* ПЕРЕКЛЮЧЕНИЕ С FADE */
+/* FADE ПЕРЕХОД */
 document.addEventListener('click', (e) => {
   if (!e.target.classList.contains('arrow')) return;
 
