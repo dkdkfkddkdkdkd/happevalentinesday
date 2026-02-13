@@ -5,7 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy Valentine's Day</title>
 
+<!-- Основной винтажный шрифт -->
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+<!-- Шрифт для стрелки -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
 * {
@@ -27,7 +30,7 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 20px;
+  padding: 30px 20px;
 }
 
 .slide.active {
@@ -35,57 +38,30 @@ body {
 }
 
 /* ---------- TEXT ---------- */
-h1, h2 {
+#slide1 h1 {
+  font-size: 3rem;
+  letter-spacing: 2px;
+}
+
+h2 {
+  font-size: 2.8rem;
   font-weight: 700;
 }
 
-#slide1 h1 {
-  font-size: 3rem;
-  margin-bottom: 20px;
-}
-
-/* ---------- BUTTONS ---------- */
-.btn {
-  margin-top: 25px;
-  padding: 18px 50px;
-  font-size: 2.2rem;
-  border-radius: 20px;
-  border: 2px solid #000;
-  background: transparent;
-  cursor: pointer;
-  font-family: 'Dancing Script', cursive;
-
-  /* КЛЮЧЕВОЕ */
-  position: relative;
-  z-index: 10;
-  pointer-events: auto;
-}
-
-/* ---------- FIRST SLIDE ---------- */
-.choice {
-  display: flex;
-  gap: 20px;
-}
-
+/* ---------- CONTENT ---------- */
 .cat-img {
   width: 160px;
   margin: 20px 0;
 }
 
-/* ---------- POSTCARD ---------- */
 .postcard {
   background: #fff5f7;
-  padding: 40px;
+  padding: 45px;
   border-radius: 24px;
   max-width: 500px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
-.postcard h2 {
-  font-size: 2.8rem;
-}
-
-/* ---------- MEMORIES ---------- */
 .photos {
   display: flex;
   gap: 14px;
@@ -102,11 +78,41 @@ h1, h2 {
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
-/* ---------- FINAL ---------- */
 .love {
   font-size: 2.5rem;
   color: #8B0000;
   text-transform: uppercase;
+}
+
+/* ---------- ARROW ---------- */
+.arrow {
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 3.5rem;
+  cursor: pointer;
+  user-select: none;
+  z-index: 100;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.arrow:hover {
+  transform: translateX(6px);
+  opacity: 0.7;
+}
+
+.arrow::after {
+  content: "→";
+}
+
+/* ---------- MOBILE ---------- */
+@media (max-width: 600px) {
+  .arrow {
+    font-size: 3rem;
+    right: 20px;
+    bottom: 20px;
+  }
 }
 </style>
 </head>
@@ -114,65 +120,47 @@ h1, h2 {
 <body>
 
 <!-- SLIDE 1 -->
-<section class="slide active" id="slide1">
+<section class="slide active">
   <h1>HAPPY VALENTINE'S DAY</h1>
   <img src="cat-sticker.png" class="cat-img" alt="cat">
-  <div class="choice">
-    <button class="btn" id="openBtn">open</button>
-    <button class="btn" id="noBtn">no</button>
-  </div>
 </section>
 
 <!-- SLIDE 2 -->
-<section class="slide" id="slide2">
+<section class="slide">
   <div class="postcard">
     <h2>Моей самой лучшей и любимой асюше 💌</h2>
   </div>
-  <button class="btn" id="next2">next</button>
 </section>
 
 <!-- SLIDE 3 -->
-<section class="slide" id="slide3">
+<section class="slide">
   <h2>our memories</h2>
   <div class="photos">
     <img src="memory1.jpg">
     <img src="memory2.jpg">
   </div>
-  <button class="btn" id="next3">next</button>
 </section>
 
 <!-- SLIDE 4 -->
-<section class="slide" id="slide4">
+<section class="slide">
   <div class="love">Безумно тебя люблю</div>
 </section>
 
+<!-- ARROW -->
+<div class="arrow" id="arrow"></div>
+
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+  const slides = document.querySelectorAll('.slide');
+  const arrow = document.getElementById('arrow');
+  let current = 0;
 
-  const openBtn = document.getElementById('openBtn');
-  const noBtn = document.getElementById('noBtn');
-  const next2 = document.getElementById('next2');
-  const next3 = document.getElementById('next3');
-
-  let scale = 1;
-
-  noBtn.addEventListener('click', () => {
-    scale += 0.2;
-    openBtn.style.transform = `scale(${scale})`;
-  });
-
-  openBtn.addEventListener('click', () => showSlide('slide2'));
-  next2.addEventListener('click', () => showSlide('slide3'));
-  next3.addEventListener('click', () => showSlide('slide4'));
-
-  function showSlide(id) {
-    document.querySelectorAll('.slide').forEach(slide => {
-      slide.classList.remove('active');
-    });
-    document.getElementById(id).classList.add('active');
+  arrow.addEventListener('click', () => {
+    slides[current].classList.remove('active');
+    current = (current + 1) % slides.length;
+    slides[current].classList.add('active');
     window.scrollTo(0, 0);
-  }
-
+  });
 });
 </script>
 
