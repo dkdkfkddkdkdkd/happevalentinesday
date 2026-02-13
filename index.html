@@ -5,20 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy Valentine's Day</title>
 
-<!-- Основной винтажный шрифт -->
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
-<!-- Шрифт для стрелки -->
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
   font-family: 'Dancing Script', cursive;
-  background: #ffffff;
+  background: #fff;
   color: #222;
 }
 
@@ -28,9 +24,8 @@ body {
   display: none;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   text-align: center;
-  padding: 30px 20px;
+  padding: 40px 20px;
 }
 
 .slide.active {
@@ -38,25 +33,25 @@ body {
 }
 
 /* ---------- TEXT ---------- */
-#slide1 h1 {
+h1 {
   font-size: 3rem;
-  letter-spacing: 2px;
+  margin-bottom: 20px;
 }
 
 h2 {
   font-size: 2.8rem;
-  font-weight: 700;
+  margin: 0;
 }
 
 /* ---------- CONTENT ---------- */
 .cat-img {
-  width: 160px;
+  width: 170px;
   margin: 20px 0;
 }
 
 .postcard {
   background: #fff5f7;
-  padding: 45px;
+  padding: 50px 40px;
   border-radius: 24px;
   max-width: 500px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
@@ -67,7 +62,7 @@ h2 {
   gap: 14px;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 25px;
+  margin: 30px 0 10px;
 }
 
 .photos img {
@@ -86,32 +81,24 @@ h2 {
 
 /* ---------- ARROW ---------- */
 .arrow {
-  position: fixed;
-  right: 30px;
-  bottom: 30px;
+  margin-top: 40px;
   font-family: 'Montserrat', sans-serif;
-  font-size: 3.5rem;
+  font-size: 4.5rem;
   cursor: pointer;
   user-select: none;
-  z-index: 100;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
 .arrow:hover {
-  transform: translateX(6px);
+  transform: translateX(10px);
   opacity: 0.7;
-}
-
-.arrow::after {
-  content: "→";
 }
 
 /* ---------- MOBILE ---------- */
 @media (max-width: 600px) {
   .arrow {
-    font-size: 3rem;
-    right: 20px;
-    bottom: 20px;
+    font-size: 4rem;
+    margin-top: 30px;
   }
 }
 </style>
@@ -123,6 +110,7 @@ h2 {
 <section class="slide active">
   <h1>HAPPY VALENTINE'S DAY</h1>
   <img src="cat-sticker.png" class="cat-img" alt="cat">
+  <div class="arrow">→</div>
 </section>
 
 <!-- SLIDE 2 -->
@@ -130,6 +118,7 @@ h2 {
   <div class="postcard">
     <h2>Моей самой лучшей и любимой асюше 💌</h2>
   </div>
+  <div class="arrow">→</div>
 </section>
 
 <!-- SLIDE 3 -->
@@ -139,27 +128,28 @@ h2 {
     <img src="memory1.jpg">
     <img src="memory2.jpg">
   </div>
+  <div class="arrow">→</div>
 </section>
 
 <!-- SLIDE 4 -->
 <section class="slide">
   <div class="love">Безумно тебя люблю</div>
+  <div class="arrow">→</div>
 </section>
-
-<!-- ARROW -->
-<div class="arrow" id="arrow"></div>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const slides = document.querySelectorAll('.slide');
-  const arrow = document.getElementById('arrow');
+  const arrows = document.querySelectorAll('.arrow');
   let current = 0;
 
-  arrow.addEventListener('click', () => {
-    slides[current].classList.remove('active');
-    current = (current + 1) % slides.length;
-    slides[current].classList.add('active');
-    window.scrollTo(0, 0);
+  arrows.forEach(arrow => {
+    arrow.addEventListener('click', () => {
+      slides[current].classList.remove('active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('active');
+      window.scrollTo(0, 0);
+    });
   });
 });
 </script>
