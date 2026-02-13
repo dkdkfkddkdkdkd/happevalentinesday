@@ -87,6 +87,7 @@ body {
   object-fit: cover;
   border-radius: 18px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  margin-bottom: 20px;
 }
 
 /* GIF-анимация вместо видео */
@@ -149,13 +150,6 @@ body {
 .heart::before { top: -11px; left: 0; }
 .heart::after { left: 11px; top: 0; }
 
-/* ФИНАЛ */
-.center-final {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
 </style>
 </head>
 
@@ -179,29 +173,24 @@ body {
   <div class="arrow">➝</div>
 </section>
 
-<!-- СЛАЙД 3 (СКРОЛЛ + ФОТО + GIF) -->
+<!-- СЛАЙД 3 (СКРОЛЛ + ФОТО + GIF + НОВЫЕ ФОТО) -->
 <section class="slide scroll">
   <div class="vintage-text">our memories</div>
 
   <div class="photos">
     <img src="memory1.jpg">
     <img src="memory2.jpg">
+    <!-- Новые фотографии под существующими -->
+    <img src="photo1.jpg">
+    <img src="photo.jpg">
   </div>
 
-  <!-- GIF-анимация вместо видео -->
+  <!-- GIF-анимация -->
   <div class="video-box">
     <img src="video.gif" alt="анимированная память">
   </div>
 
   <div class="arrow">➝</div>
-</section>
-
-<!-- СЛАЙД 4 -->
-<section class="slide">
-  <div class="center-final">
-    <div class="vintage-title">Безумно тебя люблю</div>
-    <div class="arrow">➝</div>
-  </div>
 </section>
 
 <script>
