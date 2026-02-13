@@ -189,7 +189,7 @@ document.addEventListener('click', (e) => {
   slides[current].classList.add('active');
 });
 
-/* 2-й слайд - удаляем белый фон с JPG и размещаем объекты в свободной области */
+/* 2-й слайд - удаляем белый фон с JPG и фиксируем позиции объектов */
 function removeWhiteBackground(src, callback) {
   const img = new Image();
   img.src = src;
@@ -219,22 +219,39 @@ function removeWhiteBackground(src, callback) {
 const objectContainer = document.getElementById('objectContainer');
 const objects = ['x1.jpg','x2.jpg','x3.jpg','x4.jpg','x5.jpg','x6.jpg','x7.jpg','x8.jpg'];
 
-objects.forEach(src => {
+// Фиксированные позиции равномерно по области, слегка под углом ±10°
+const fixedPositions = [];
+const containerWidth = objectContainer.offsetWidth;
+const containerHeight = objectContainer.offsetHeight;
+const padding = 20;
+
+const cols = 4;
+const rows = Math.ceil(objects.length / cols);
+
+for (let i = 0; i < objects.length; i++) {
+  const col = i % cols;
+  const row = Math.floor(i / cols);
+
+  const cellWidth = (containerWidth - 2 * padding) / cols;
+  const cellHeight = (containerHeight - 2 * padding) / rows;
+
+  const left = padding + col * cellWidth + Math.random() * (cellWidth - 80);
+  const top = padding + row * cellHeight + Math.random() * (cellHeight - 80);
+  const angle = Math.random() * 20 - 10;
+
+  fixedPositions.push({ left, top, angle });
+}
+
+objects.forEach((src, index) => {
   removeWhiteBackground(src, (img) => {
     img.style.position = 'absolute';
     img.style.width = (80 + Math.random()*40) + 'px';
     img.style.height = 'auto';
 
-    // свободная область под текстом
-    const containerWidth = objectContainer.offsetWidth;
-    const containerHeight = objectContainer.offsetHeight;
-    const padding = 20;
-
-    img.style.top = (padding + Math.random() * (containerHeight - 80 - 2*padding)) + 'px';
-    img.style.left = (padding + Math.random() * (containerWidth - 80 - 2*padding)) + 'px';
-
-    // лёгкий поворот ±10°
-    img.style.transform = `rotate(${(Math.random()*20 - 10)}deg)`;
+    const pos = fixedPositions[index];
+    img.style.left = pos.left + 'px';
+    img.style.top = pos.top + 'px';
+    img.style.transform = `rotate(${pos.angle}deg)`;
 
     objectContainer.appendChild(img);
   });
