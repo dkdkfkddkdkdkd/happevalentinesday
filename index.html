@@ -42,12 +42,16 @@ body {
   pointer-events: auto;
 }
 
-/* ТЕКСТ */
-h1 {
+/* ВИНТАЖНЫЙ ЗАГОЛОВОК (1 и 4 слайд) */
+.vintage-title {
+  font-family: 'Dancing Script', cursive;
+  font-weight: 700;
   font-size: 3.2rem;
   letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
+/* ОБЫЧНЫЙ ВИНТАЖНЫЙ ТЕКСТ */
 .vintage-text {
   font-size: 3rem;
   line-height: 1.25;
@@ -131,7 +135,7 @@ h1 {
 
 <!-- СЛАЙД 1 -->
 <section class="slide active">
-  <h1>HAPPY VALENTINE'S DAY</h1>
+  <div class="vintage-title">HAPPY VALENTINE'S DAY</div>
   <img src="cat-sticker.png" class="cat-img">
   <div class="arrow">➝</div>
 </section>
@@ -162,7 +166,7 @@ h1 {
 <!-- СЛАЙД 4 -->
 <section class="slide">
   <div class="center-final">
-    <div class="vintage-text">Безумно тебя люблю</div>
+    <div class="vintage-title">Безумно тебя люблю</div>
     <div class="arrow">➝</div>
   </div>
 </section>
