@@ -15,7 +15,6 @@ body {
   font-family: 'Dancing Script', cursive;
   background: #fff;
   color: #2b1a1a;
-  overflow-x: hidden;
 }
 
 .slide {
@@ -63,22 +62,23 @@ h1 {
   box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
-/* стрелка */
+/* СТРЕЛКА */
 .arrow {
-  font-size: 4rem;
+  font-size: 4.5rem;
+  margin-top: 20px;
   cursor: pointer;
   user-select: none;
   transition: transform 0.3s ease;
 }
 
 .arrow:hover {
-  transform: translateX(10px);
+  transform: translateX(12px);
 }
 
-/* сердца на втором слайде */
+/* сердца 2 слайд */
 .hearts {
   position: relative;
-  width: 140px;
+  width: 150px;
   height: 260px;
   margin-top: 25px;
 }
@@ -87,7 +87,7 @@ h1 {
   position: absolute;
   width: 22px;
   height: 22px;
-  background: rgba(180, 0, 0, 0.35);
+  background: rgba(180,0,0,0.35);
   transform: rotate(45deg);
 }
 
@@ -97,21 +97,14 @@ h1 {
   position: absolute;
   width: 22px;
   height: 22px;
-  background: rgba(180, 0, 0, 0.35);
+  background: rgba(180,0,0,0.35);
   border-radius: 50%;
 }
 
-.heart::before {
-  top: -11px;
-  left: 0;
-}
+.heart::before { top: -11px; left: 0; }
+.heart::after { left: 11px; top: 0; }
 
-.heart::after {
-  left: 11px;
-  top: 0;
-}
-
-/* последний слайд */
+/* финал */
 .center-final {
   display: flex;
   flex-direction: column;
@@ -123,14 +116,12 @@ h1 {
 
 <body>
 
-<!-- СЛАЙД 1 -->
 <section class="slide active">
   <h1>HAPPY VALENTINE'S DAY</h1>
   <img src="cat-sticker.png" class="cat-img">
   <div class="arrow">➝</div>
 </section>
 
-<!-- СЛАЙД 2 -->
 <section class="slide">
   <div class="vintage-text">
     Моей самой лучшей и любимой асюше 💌
@@ -141,7 +132,6 @@ h1 {
   <div class="arrow">➝</div>
 </section>
 
-<!-- СЛАЙД 3 -->
 <section class="slide">
   <div class="vintage-text">our memories</div>
 
@@ -153,7 +143,6 @@ h1 {
   <div class="arrow">➝</div>
 </section>
 
-<!-- СЛАЙД 4 -->
 <section class="slide">
   <div class="center-final">
     <div class="vintage-text">Безумно тебя люблю</div>
@@ -163,26 +152,26 @@ h1 {
 
 <script>
 const slides = document.querySelectorAll('.slide');
-const arrows = document.querySelectorAll('.arrow');
-let index = 0;
+let current = 0;
 
-arrows.forEach(a => {
-  a.addEventListener('click', () => {
-    slides[index].classList.remove('active');
-    index = (index + 1) % slides.length;
-    slides[index].classList.add('active');
-    window.scrollTo(0,0);
-  });
+/* ВАЖНО: делегирование клика */
+document.addEventListener('click', (e) => {
+  if (!e.target.classList.contains('arrow')) return;
+
+  slides[current].classList.remove('active');
+  current = (current + 1) % slides.length;
+  slides[current].classList.add('active');
+  window.scrollTo(0, 0);
 });
 
-/* генерация сердечек на 2 слайде */
+/* сердца */
 const heartBox = document.getElementById('heartCluster');
-for (let i = 0; i < 12; i++) {
+for (let i = 0; i < 14; i++) {
   const h = document.createElement('div');
   h.className = 'heart';
-  h.style.left = Math.random() * 90 + 'px';
-  h.style.top = Math.random() * 230 + 'px';
-  h.style.transform = rotate(${45 + (Math.random()*40 - 20)}deg);
+  h.style.left = Math.random() * 110 + 'px';
+  h.style.top = Math.random() * 240 + 'px';
+  h.style.transform = `rotate(${45 + (Math.random()*40 - 20)}deg)`;
   heartBox.appendChild(h);
 }
 </script>
