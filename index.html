@@ -32,7 +32,7 @@ body {
 
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.5s ease;
+  transition: opacity 1s ease; /* плавный fade 1 секунда */
 }
 
 .slide.active {
@@ -92,8 +92,8 @@ body {
 /* ВИДЕО */
 .video-box {
   width: 260px;
-  height: 460px;        /* фиксированная высота */
   max-width: 85vw;
+  height: 460px;       /* фиксированная высота */
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 12px 30px rgba(0,0,0,0.2);
@@ -190,8 +190,9 @@ body {
 
   <!-- ВИДЕО -->
   <div class="video-box">
-    <video id="memoryVideo" autoplay loop muted playsinline preload="auto" poster="video-poster.jpg">
+    <video id="memoryVideo" autoplay muted loop playsinline preload="auto" poster="video-poster.jpg">
       <source src="video.mp4" type="video/mp4">
+      Ваш браузер не поддерживает видео.
     </video>
   </div>
 
@@ -235,6 +236,7 @@ if (heartBox) {
 /* ПРИНУДИТЕЛЬНЫЙ ЗАПУСК ВИДЕО */
 const video = document.getElementById('memoryVideo');
 if (video) {
+  video.muted = true;
   video.play().catch(() => {
     // если autoplay заблокирован, постер останется
   });
