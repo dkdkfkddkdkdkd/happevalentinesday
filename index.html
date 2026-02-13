@@ -32,7 +32,7 @@ body {
 
   opacity: 0;
   pointer-events: none;
-  transition: opacity 1s ease; /* fade 1 секунда */
+  transition: opacity 1s ease;
 }
 
 .slide.active {
@@ -56,7 +56,7 @@ body {
 
 .vintage-text {
   font-weight: 500; /* тоньше и аккуратнее */
-  font-size: 1rem;  /* уменьшено примерно в 2 раза */
+  font-size: 1rem;  /* для 2-го слайда */
   line-height: 1.3;
 }
 
@@ -144,6 +144,22 @@ body {
 .heart::before { top: -11px; left: 0; }
 .heart::after { left: 11px; top: 0; }
 
+/* --- Анимация появления с подъёмом --- */
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.fade-up {
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards;
+}
+
+/* Задержки для последовательного появления */
+.fade-up.delay-1 { animation-delay: 0.2s; }
+.fade-up.delay-2 { animation-delay: 0.5s; }
+.fade-up.delay-3 { animation-delay: 0.8s; }
+
 </style>
 </head>
 
@@ -151,9 +167,9 @@ body {
 
 <!-- СЛАЙД 1 -->
 <section class="slide active">
-  <div class="vintage-title">Happy Valentine’s Day</div>
-  <img src="cat-sticker.png" class="cat-img">
-  <div class="arrow">➝</div>
+  <div class="vintage-title fade-up delay-1">Happy Valentine’s Day</div>
+  <img src="cat-sticker.png" class="cat-img fade-up delay-2">
+  <div class="arrow fade-up delay-3">➝</div>
 </section>
 
 <!-- СЛАЙД 2 -->
@@ -174,12 +190,10 @@ body {
   <div class="photos">
     <img src="memory1.jpg">
     <img src="memory2.jpg">
-    <!-- Новые фотографии под существующими -->
     <img src="photo1.jpg">
     <img src="photo.jpg">
   </div>
 
-  <!-- GIF-анимация -->
   <div class="video-box">
     <img src="video.gif" alt="анимированная память">
   </div>
