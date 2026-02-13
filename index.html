@@ -81,7 +81,6 @@ h2 {
 
 /* ---------- ARROW ---------- */
 .arrow {
-  margin-top: 40px;
   font-family: 'Montserrat', sans-serif;
   font-size: 4.5rem;
   cursor: pointer;
@@ -94,11 +93,23 @@ h2 {
   opacity: 0.7;
 }
 
+/* ---------- LAST SLIDE CENTER ---------- */
+#slide4 .centered-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+#slide4 .arrow {
+  margin-top: 40px;
+}
+
 /* ---------- MOBILE ---------- */
 @media (max-width: 600px) {
   .arrow {
     font-size: 4rem;
-    margin-top: 30px;
   }
 }
 </style>
@@ -132,9 +143,11 @@ h2 {
 </section>
 
 <!-- SLIDE 4 -->
-<section class="slide">
-  <div class="love">Безумно тебя люблю</div>
-  <div class="arrow">→</div>
+<section class="slide" id="slide4">
+  <div class="centered-container">
+    <div class="love">Безумно тебя люблю</div>
+    <div class="arrow">→</div>
+  </div>
 </section>
 
 <script>
