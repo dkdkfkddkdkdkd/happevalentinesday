@@ -5,14 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Valentine</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+<!-- ПОДКЛЮЧЕНИЕ НАСТОЯЩЕГО DANCING SCRIPT -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:opsz,wght@24..48,600;24..48,700&display=swap">
 
 <style>
+/* Принудительное наследование Dancing Script для всего сайта */
+html, body, * {
+  font-family: 'Dancing Script', cursive !important;
+}
+
 * { box-sizing: border-box; }
 
 body {
   margin: 0;
-  font-family: 'Dancing Script', cursive;
   color: #2b1a1a;
   background: url("background.jpg") center / cover no-repeat fixed;
 }
@@ -22,7 +27,6 @@ body {
   min-height: 100vh;
   position: absolute;
   inset: 0;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -40,17 +44,15 @@ body {
   pointer-events: auto;
 }
 
-/* ВИНТАЖНЫЙ ПРОПИСНОЙ ЗАГОЛОВОК (ЧИСТЫЙ DANCING SCRIPT) */
+/* ВИНТАЖНЫЙ ПРОПИСНОЙ ЗАГОЛОВОК (1 и 4 слайд) */
 .vintage-title {
-  font-family: 'Dancing Script', cursive;
   font-weight: 700;
   font-size: 3.4rem;
   line-height: 1.2;
 }
 
-/* ОСНОВНОЙ ТЕКСТ */
+/* ОСНОВНОЙ ВИНТАЖНЫЙ ТЕКСТ */
 .vintage-text {
-  font-family: 'Dancing Script', cursive;
   font-weight: 600;
   font-size: 3rem;
   line-height: 1.25;
