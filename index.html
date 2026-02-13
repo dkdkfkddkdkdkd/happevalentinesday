@@ -3,38 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Valentine</title>
 
-<!-- Dancing Script (ТОЛЬКО ОН) -->
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+<!-- Dancing Script -->
+<link rel="stylesheet"
+href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&display=swap">
 
 <style>
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Dancing Script', cursive !important;
 }
 
 body {
-  margin: 0;
-  background: url("background.jpg") center / cover no-repeat fixed;
-  color: #2b1a1a;
+  min-height: 100vh;
+  background: url("background.jpg") center / cover no-repeat;
+  overflow: hidden;
 }
 
-/* ---------- СЛАЙДЫ ---------- */
+/* ---------- SLIDES ---------- */
 .slide {
   position: absolute;
   inset: 0;
-  min-height: 100vh;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
-  padding: 40px 20px;
-
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.7s ease; /* 🔥 РОВНО 0.7 */
+  transition: opacity 1s ease;
+  text-align: center;
 }
 
 .slide.active {
@@ -42,126 +43,144 @@ body {
   pointer-events: auto;
 }
 
-/* ---------- ШРИФТЫ ---------- */
-.vintage-title,
-.vintage-text {
-  font-family: "Dancing Script", cursive; /* ✅ ЖЁСТКО */
-}
-
-/* ---------- ТЕКСТ ---------- */
-.vintage-title {
-  font-size: 3.6rem;
+/* ---------- TEXT ---------- */
+h1, h2 {
   font-weight: 700;
+  font-size: 3.2rem;
+  color: #000;
 }
 
-.vintage-text {
-  font-size: 3rem;
-  font-weight: 600;
-}
-
-/* ---------- СТРЕЛКА ---------- */
+/* ---------- ARROW ---------- */
 .arrow {
-  font-size: 4.5rem;
-  margin-top: 30px;
+  margin-top: 40px;
+  font-size: 4rem;
   cursor: pointer;
   user-select: none;
   transition: transform 0.3s ease;
 }
 
 .arrow:hover {
-  transform: translateX(12px);
+  transform: translateX(10px);
 }
 
-/* ---------- СЕРДЦА ---------- */
-.hearts {
-  position: relative;
+/* ---------- IMAGES ---------- */
+.cat-img {
   width: 160px;
+  margin: 30px 0;
+}
+
+.photos {
+  display: flex;
+  gap: 16px;
+  margin-top: 30px;
+}
+
+.photos img {
+  width: 200px;
   height: 260px;
-  margin-top: 25px;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+/* ---------- HEARTS SLIDE 2 ---------- */
+.hearts {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 200px;
 }
 
 .heart {
-  position: absolute;
-  width: 22px;
-  height: 22px;
-  background: rgba(170, 0, 0, 0.4);
+  width: 18px;
+  height: 18px;
+  background: red;
+  margin: 6px;
   transform: rotate(45deg);
+  position: relative;
 }
 
 .heart::before,
 .heart::after {
   content: "";
   position: absolute;
-  width: 22px;
-  height: 22px;
-  background: rgba(170, 0, 0, 0.4);
+  width: 18px;
+  height: 18px;
+  background: red;
   border-radius: 50%;
 }
 
-.heart::before {
-  top: -11px;
-  left: 0;
-}
+.heart::before { top: -9px; left: 0; }
+.heart::after { left: -9px; top: 0; }
 
-.heart::after {
-  left: 11px;
-  top: 0;
+/* ---------- LAST SLIDE ---------- */
+.center {
+  justify-content: center;
 }
 </style>
 </head>
 
 <body>
 
-<!-- СЛАЙД 1 -->
+<!-- SLIDE 1 -->
 <section class="slide active">
-  <div class="vintage-title">Happy Valentine’s Day</div>
-  <div class="arrow">➝</div>
+  <h1>Happy Valentine’s Day</h1>
+  <img src="cat-sticker.png" class="cat-img">
+  <div class="arrow">→</div>
 </section>
 
-<!-- СЛАЙД 2 -->
+<!-- SLIDE 2 -->
 <section class="slide">
-  <div class="vintage-text">
-    Моей самой лучшей и любимой асюше
+  <h2>Моей самой лучшей и любимой асюше 💌</h2>
+
+  <div class="hearts">
+    <div class="heart"></div><div class="heart"></div><div class="heart"></div>
+    <div class="heart"></div><div class="heart"></div><div class="heart"></div>
+    <div class="heart"></div><div class="heart"></div>
   </div>
 
-  <div class="hearts" id="hearts"></div>
-
-  <div class="arrow">➝</div>
+  <div class="arrow">→</div>
 </section>
 
-<!-- СЛАЙД 3 -->
+<!-- SLIDE 3 -->
 <section class="slide">
-  <div class="vintage-text">our memories</div>
-  <div class="arrow">➝</div>
+  <h2>our memories</h2>
+
+  <div class="photos">
+    <img src="memory1.jpg">
+    <img src="memory2.jpg">
+  </div>
+
+  <div class="arrow">→</div>
 </section>
 
-<!-- СЛАЙД 4 -->
-<section class="slide">
-  <div class="vintage-title">Безумно тебя люблю</div>
+<!-- SLIDE 4 -->
+<section class="slide center">
+  <h2>Безумно тебя люблю</h2>
+  <div class="arrow">→</div>
 </section>
 
 <script>
 const slides = document.querySelectorAll(".slide");
+const arrows = document.querySelectorAll(".arrow");
+
 let current = 0;
+let animating = false;
 
-document.addEventListener("click", (e) => {
-  if (!e.target.classList.contains("arrow")) return;
+arrows.forEach(arrow => {
+  arrow.addEventListener("click", () => {
+    if (animating) return;
+    animating = true;
 
-  slides[current].classList.remove("active");
-  current = (current + 1) % slides.length;
-  slides[current].classList.add("active");
+    slides[current].classList.remove("active");
+
+    setTimeout(() => {
+      current = (current + 1) % slides.length;
+      slides[current].classList.add("active");
+      animating = false;
+    }, 1000); // 1 секунда fade
+  });
 });
-
-/* СЕРДЕЧКИ */
-const box = document.getElementById("hearts");
-for (let i = 0; i < 18; i++) {
-  const h = document.createElement("div");
-  h.className = "heart";
-  h.style.left = Math.random() * 120 + "px";
-  h.style.top = Math.random() * 240 + "px";
-  h.style.transform = `rotate(${45 + (Math.random() * 40 - 20)}deg)`;
-  box.appendChild(h);
-}
 </script>
 
 </body>
