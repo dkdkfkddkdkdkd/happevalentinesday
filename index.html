@@ -92,6 +92,7 @@ body {
 /* ВИДЕО */
 .video-box {
   width: 260px;
+  height: 460px;        /* фиксированная высота */
   max-width: 85vw;
   border-radius: 20px;
   overflow: hidden;
@@ -101,6 +102,8 @@ body {
 
 .video-box video {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
   display: block;
 }
 
@@ -176,7 +179,7 @@ body {
   <div class="arrow">➝</div>
 </section>
 
-<!-- СЛАЙД 3 (СКРОЛЛ + ВИДЕО) -->
+<!-- СЛАЙД 3 (СКРОЛЛ + ФОТО + ВИДЕО) -->
 <section class="slide scroll">
   <div class="vintage-text">our memories</div>
 
@@ -185,8 +188,9 @@ body {
     <img src="memory2.jpg">
   </div>
 
+  <!-- ВИДЕО -->
   <div class="video-box">
-    <video autoplay loop muted playsinline>
+    <video id="memoryVideo" autoplay loop muted playsinline preload="auto" poster="video-poster.jpg">
       <source src="video.mp4" type="video/mp4">
     </video>
   </div>
@@ -226,6 +230,14 @@ if (heartBox) {
     h.style.transform = `rotate(${45 + (Math.random()*40 - 20)}deg)`;
     heartBox.appendChild(h);
   }
+}
+
+/* ПРИНУДИТЕЛЬНЫЙ ЗАПУСК ВИДЕО */
+const video = document.getElementById('memoryVideo');
+if (video) {
+  video.play().catch(() => {
+    // если autoplay заблокирован, постер останется
+  });
 }
 </script>
 
